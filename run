@@ -1,0 +1,39 @@
+tfm.exec.disableAllShamanSkills(true)
+tfm.exec.disableAutoNewGame(true)
+tfm.exec.newGame("4575936")
+
+  -- Mapas
+mapas={ "@2067212" , "@3604466" , "@3638927" , "@3793911" , "@3624400" , "@3761727" , "@3619917" , "@3911773" , "@3729289" , "@2403601" , "@3389471" , "@2391874" , "@3611760"}
+ 
+-- Nova rounda
+function nextRound()
+    tfm.exec.newGame(mapas[math.random(#mapas)])
+end
+ 
+-- Novo jogo
+function eventNewGame()
+ vivo=0
+    for name,player in pairs(tfm.get.room.playerList) do
+        vivo=vivo+1
+    end
+                tfm.exec.setUIMapName("Temple Run Créditos Afarthur")
+for i in pairs(tfm.get.room.playerList) do
+if tfm.get.room.playerList[i].isShaman then
+tfm.exec.setVampirePlayer(i)
+end
+end
+end
+ 
+-- Jogador morre
+function eventPlayerDied(name)
+    vivo=vivo-1
+end
+ 
+-- Jogador ganha
+function eventPlayerWon(name)
+    vivo=vivo-1              
+end
+ 
+function eventPlayerVampire(p)
+vivo=vivo-1;
+end
